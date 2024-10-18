@@ -1,0 +1,9 @@
+[{
+"meta-data": "This file contains the history log of the web blog"},
+{"history": [
+    {"timestamp": "2021-07-01 12:00:00",
+    "description": "Initial commit of the web blog",
+    "content" : "Blog content"
+}
+    ]}
+]
