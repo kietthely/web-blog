@@ -1,0 +1,11 @@
+[{
+    "meta-data": "This file contains the history log of the web blog"},
+    {"posts": [
+        {"id": "1",
+        "title": "First post",
+        "summary": "Initial commit of the web blog",
+        "content" : "Blog content",
+        "date": "2021-07-01 12:00:00"
+    }
+        ]}
+    ]
