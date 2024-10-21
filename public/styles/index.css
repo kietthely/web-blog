@@ -1,16 +1,24 @@
 footer{
 
-
+text-align: center;
+}
+.content-wrapper{
+    display: flex;
+    flex:1;
+    flex-direction: column;
 }
 .container{
 display: flex;
-height: 100vh;
+min-height: 100vh;
 }
 .side-bar{
     width: 150px;
     background-color: #333;
     color: white;
     padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 
 }
 .content{
@@ -21,5 +29,5 @@ height: 100vh;
 body{
 background-color: aqua;    
 margin: 0;
-
+padding: 0;
 }
