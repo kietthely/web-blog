@@ -1,0 +1,25 @@
+footer{
+
+
+}
+.container{
+display: flex;
+height: 100vh;
+}
+.side-bar{
+    width: 150px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+
+}
+.content{
+    flex: 1;
+    overflow-y: auto ;
+    padding: 10px;
+}
+body{
+background-color: aqua;    
+margin: 0;
+
+}
