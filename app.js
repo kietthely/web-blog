@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import fs from "fs";
 /*
 Use dynamic routes to render the posts.
 
@@ -22,6 +23,13 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// load the next post id from the posts-storage file
+fs.readFile("posts-storage.json", "utf8", (err, data) => { 
+
+console.log(data);
+
+});
+
 app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -29,9 +37,10 @@ app.get("/", (req, res) => {
 app.get("/create", (req, res) => {
   res.render("form.ejs");
  });
-app.post("/form/submit", (req, res) => {
+app.post("/create/submit", (req, res) => {
   res.render("index.ejs", {
-
+    title: req.body.title,
+    content: req.body.content,
   });
 });
 
