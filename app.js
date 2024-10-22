@@ -25,8 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // load the next post id from the posts-storage file
 fs.readFile("posts-storage.json", "utf8", (err, data) => { 
-
-console.log(data);
+  // load json file as a json object
+  const jsonData = JSON.parse(data);
+  // load posts from the json object
+  const posts = jsonData[0].posts;
+  console.log(posts);
 
 });
 

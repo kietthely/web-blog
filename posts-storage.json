@@ -1,6 +1,6 @@
 [{
-    "meta-data": "This file contains the history log of the web blog"},
-    {"posts": [
+    "meta-data": "This file contains the history log of the web blog",
+    "posts": [
         {"id": "1",
         "title": "First post",
         "summary": "Initial commit of the web blog",
@@ -12,6 +12,6 @@
         "summary": "Second post of the web blog",
         "content" : "Blog content",
         "date": "2024-10-21 22:00:00"
-    }
-        ]}
-    ]
+    }]
+        }
+]
