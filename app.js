@@ -22,30 +22,38 @@ Step 7: To edit it, users need to go to the post and click on Edit.
 const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
+function readPostsDatabase(id) { 
+  // load the next post id from the posts-storage file
+  fs.readFile("posts-storage.json", "utf8", (err, data) => { 
+    //TODO: error handler for reading the file
+    
+    // load json file as a json object
+    const jsonData = JSON.parse(data);
+    // load posts from the json object
+    const posts = jsonData[0].posts;
+    console.log(posts);
 
-// load the next post id from the posts-storage file
-fs.readFile("posts-storage.json", "utf8", (err, data) => { 
-  //TODO: error handler for reading the file
-  
-  // load json file as a json object
-  const jsonData = JSON.parse(data);
-  // load posts from the json object
-  const posts = jsonData[0].posts;
-  // last id
-  let lastID = posts[posts.length - 1].id;
-  // TODO: Error handler for converting the last id to a number
-  lastID = Number(lastID);
-  lastID++;
+  });
+}
 
-  console.log(lastID);
-  
+function writePostsDatabase() {
+  fs.writeFile("posts-storage.json", JSON.stringify(data), (err) => { 
 
 
-});
+  });
+
+}
 
 app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
+});
+
+app.get("/posts/:id", (req, res) => {
+  res.render("post.ejs", {
+    id: req.params.id,
+  });
 });
 app.get("/create", (req, res) => {
   res.render("form.ejs");
