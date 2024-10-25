@@ -28,8 +28,9 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 function readPostsDatabase(title) { 
+  let result = null;
   // get the title from the title
-  console.log("read function: " + title);
+  
   const postTitle = convertrTitleToURL(title);
   // load the next post id from the posts-storage file
   fs.readFile("posts-storage.json", "utf8", (err, data) => { 
@@ -39,9 +40,15 @@ function readPostsDatabase(title) {
     const jsonData = JSON.parse(data);
     // load posts from the json object
     const posts = jsonData[0].posts;
-    for (let post in posts) {
-      if (convertrTitleToURL(post.title) === postTitle) {
-        return post;
+    
+    for (let postPosition = 0; postPosition < posts.length; postPosition++) {
+      
+      if (convertrTitleToURL(posts[postPosition].title) === postTitle) {
+        
+        
+        result = posts[postPosition];
+        console.log("Post found: " + result.id);
+        return result;
       }
     }
   // error handler for not finding the post
@@ -49,7 +56,7 @@ function readPostsDatabase(title) {
 });
 }
 function convertrTitleToURL(title) { 
-  console.log(title);
+  
   return title.split(" ").join("-").toLowerCase();
 }
 
@@ -68,14 +75,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/posts/:title", (req, res) => {
-  let post = readPostsDatabase(req.params.title);
-  console.log(post);
+  // let post = readPostsDatabase(req.params.title);
+  console.log("Starting at the URL: below is searching the post");
+  console.log(readPostsDatabase(req.params.title));
   
-  res.render("post.ejs", {
-    title: post.title,
-    content: post.content,
-    date: post.date
-  });
+  // res.render("post.ejs", {
+  //   title: post.title,
+  //   content: post.content,
+  //   date: post.date
+  // });
 });
 app.get("/create", (req, res) => {
   res.render("form.ejs");
