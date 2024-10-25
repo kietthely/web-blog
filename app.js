@@ -29,6 +29,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 function readPostsDatabase(title) { 
   // get the title from the title
+  console.log("read function: " + title);
   const postTitle = convertrTitleToURL(title);
   // load the next post id from the posts-storage file
   fs.readFile("posts-storage.json", "utf8", (err, data) => { 
@@ -43,13 +44,13 @@ function readPostsDatabase(title) {
         return post;
       }
     }
-    // error handler for not finding the post
-    return null;
-  });
+  // error handler for not finding the post
+  return null;
+});
 }
 function convertrTitleToURL(title) { 
+  console.log(title);
   return title.split(" ").join("-").toLowerCase();
-
 }
 
 function writePostsDatabase() {
@@ -67,8 +68,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/posts/:title", (req, res) => {
+  let post = readPostsDatabase(req.params.title);
+  console.log(post);
+  
   res.render("post.ejs", {
-    id: req.params.id,
+    title: post.title,
+    content: post.content,
+    date: post.date
   });
 });
 app.get("/create", (req, res) => {
