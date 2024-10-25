@@ -28,6 +28,8 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 function readPostsDatabase(title) { 
+  // get the title from the title
+  const postTitle = convertrTitleToURL(title);
   // load the next post id from the posts-storage file
   fs.readFile("posts-storage.json", "utf8", (err, data) => { 
     //TODO: error handler for reading the file
@@ -36,11 +38,16 @@ function readPostsDatabase(title) {
     const jsonData = JSON.parse(data);
     // load posts from the json object
     const posts = jsonData[0].posts;
-    console.log(posts);
-
+    for (let post in posts) {
+      if (convertrTitleToURL(post.title) === postTitle) {
+        return post;
+      }
+    }
+    // error handler for not finding the post
+    return null;
   });
 }
-function convertrTitleToId(title) { 
+function convertrTitleToURL(title) { 
   return title.split(" ").join("-").toLowerCase();
 
 }
@@ -68,6 +75,7 @@ app.get("/create", (req, res) => {
   res.render("form.ejs");
  });
 app.post("/create/submit", (req, res) => {
+  // TODO: Redirect to the new post /localhost:3000/posts/:title
   res.render("index.ejs", {
     title: req.body.title,
     content: req.body.content,
